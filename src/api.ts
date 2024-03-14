@@ -1,4 +1,6 @@
-const baseUrl = 'http://localhost:8080';
+import Toast from 'react-native-root-toast';
+
+const baseUrl = 'https://malamute-enabled-yak.ngrok-free.app';
 
 const baseHeaders = {
     "Content-Type": 'application/json',

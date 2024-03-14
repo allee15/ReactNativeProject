@@ -16,8 +16,11 @@
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-native": "0.73.4",
+    "react-native-gesture-handler": "^2.15.0",
+    "react-native-root-toast": "^3.5.1",
     "router": "^1.3.8",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "swiftui-react-native": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
