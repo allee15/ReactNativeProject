@@ -1,5 +1,3 @@
-import Toast from 'react-native-root-toast';
-
 const baseUrl = 'https://malamute-enabled-yak.ngrok-free.app';
 
 const baseHeaders = {
@@ -41,4 +39,19 @@ export const register = async (email: string, password: string) => {
     console.log(data)
 
     return data.accessToken
+};
+
+export const userDetails = async (): Promise<any> => {
+    const result = await fetch(`${baseUrl}/user/details/me`, {
+        method: 'GET',
+        headers: {
+            ...baseHeaders
+        }
+    })
+
+    const data = await result.json()
+
+    console.log(data)
+
+    return data
 };

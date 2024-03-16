@@ -1,21 +1,26 @@
 import React, { createContext, useContext, useState } from "react";
-import { login, register } from "../api";
+import { login, register, userDetails } from "../api";
 
 interface IAuthContext {
     token: string;
+    userEmail: string,
     login: (email: string, password: string) => Promise<void>;
     register: (email: string, password: string) => Promise<void>;
+    userDetails: () => Promise<void>;
 }
 
 const AuthContext = createContext<IAuthContext>({
     token: '',
+    userEmail: '',
     login: async () => {},
-    register: async () => {}
+    register: async () => {},
+    userDetails: async () => {}
 })
 
 export const AuthContextProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
 
     const [token, setToken] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
 
     const handleLogin = async (email: string, password: string) => {
         try {
@@ -36,11 +41,23 @@ export const AuthContextProvider: React.FC<{children: React.ReactNode}> = ({chil
         }
     };
 
+    const fetchUserDetails = async () => {
+        try {
+            const result = await userDetails();
+            console.log('userDetails: ', result) 
+            setUserEmail(result);
+        } catch (error) {
+            console.log('Error fetching user details:', error);
+        }
+    };
+
     return (
         <AuthContext.Provider value={{
             token,
+            userEmail,
             login: handleLogin,
-            register: handleRegister
+            register: handleRegister,
+            userDetails: fetchUserDetails
         }}>
             {children}
         </AuthContext.Provider>
