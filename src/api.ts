@@ -41,7 +41,7 @@ export const register = async (email: string, password: string) => {
     return data.accessToken
 };
 
-export const userDetails = async (): Promise<any> => {
+export const userDetails = async (): Promise<string> => {
     const result = await fetch(`${baseUrl}/user/details/me`, {
         method: 'GET',
         headers: {
