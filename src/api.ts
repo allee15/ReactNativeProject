@@ -55,3 +55,52 @@ export const userDetails = async (): Promise<string> => {
 
     return data
 };
+
+export const getGames = async (): Promise<any> => {
+    const result = await fetch(`${baseUrl}/games`, {
+        method: 'GET',
+        headers: {
+            ...baseHeaders
+        }
+    });
+
+    const data = await result.json();
+    return data;
+};
+
+export const createGame = async (userId: string): Promise<any> => {
+    const result = await fetch(`${baseUrl}/games/create`, {
+        method: 'POST',
+        headers: {
+            ...baseHeaders
+        },
+        body: JSON.stringify({ userId })
+    });
+
+    const data = await result.json();
+    return data;
+};
+
+export const joinGame = async (userId: string): Promise<any> => {
+    const result = await fetch(`${baseUrl}/games/join`, {
+        method: 'POST',
+        headers: {
+            ...baseHeaders
+        },
+        body: JSON.stringify({ userId })
+    });
+
+    const data = await result.json();
+    return data;
+};
+
+export const fetchGames = async (): Promise<any> => {
+    const result = await fetch(`${baseUrl}/games`, {
+        method: 'GET',
+        headers: {
+            ...baseHeaders
+        }
+    });
+    const data = await result.json();
+    return data;
+};

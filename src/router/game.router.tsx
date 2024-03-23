@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text } from 'react-native'
 import { GameRouteNames } from './route-names';
 import TableScreen from '../screens/game/Table.screen';
 import DetailsScreen from '../screens/user/Details.screen';
