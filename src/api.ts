@@ -56,9 +56,9 @@ export const userDetails = async (): Promise<string> => {
     return data
 };
 
-export const getGames = async (): Promise<any> => {
-    const result = await fetch(`${baseUrl}/games`, {
-        method: 'GET',
+export const createGame = async (userId: string): Promise<any> => {
+    const result = await fetch(`${baseUrl}/game`, {
+        method: 'POST',
         headers: {
             ...baseHeaders
         }
@@ -68,34 +68,19 @@ export const getGames = async (): Promise<any> => {
     return data;
 };
 
-export const createGame = async (userId: string): Promise<any> => {
-    const result = await fetch(`${baseUrl}/games/create`, {
-        method: 'POST',
-        headers: {
-            ...baseHeaders
-        },
-        body: JSON.stringify({ userId })
-    });
-
-    const data = await result.json();
-    return data;
-};
-
 export const joinGame = async (userId: string): Promise<any> => {
-    const result = await fetch(`${baseUrl}/games/join`, {
+    const result = await fetch(`${baseUrl}/game/join/${userId}`, { //TODO: game id, nu user id
         method: 'POST',
         headers: {
             ...baseHeaders
-        },
-        body: JSON.stringify({ userId })
+        }
     });
-
     const data = await result.json();
     return data;
 };
 
 export const fetchGames = async (): Promise<any> => {
-    const result = await fetch(`${baseUrl}/games`, {
+    const result = await fetch(`${baseUrl}/game`, {
         method: 'GET',
         headers: {
             ...baseHeaders
