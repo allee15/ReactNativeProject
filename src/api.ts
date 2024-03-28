@@ -1,91 +1,101 @@
-const baseUrl = 'https://malamute-enabled-yak.ngrok-free.app';
+const baseUrl = "https://malamute-enabled-yak.ngrok-free.app";
 
 const baseHeaders = {
-    "Content-Type": 'application/json',
-    "Accept": 'application/json'
-}
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
 
-export const login = async (email: string, password: string): Promise<string> => {
-    const result = await fetch(`${baseUrl}/auth/login`, {
-        method: 'POST',
-        headers: {
-            ...baseHeaders
-        },
-        body: JSON.stringify({
-            email, password
-        })
-    })
+export const login = async (
+  email: string,
+  password: string
+): Promise<string> => {
+  const result = await fetch(`${baseUrl}/auth/login`, {
+    method: "POST",
+    headers: {
+      ...baseHeaders,
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
 
-    const data = await result.json()
+  const data = await result.json();
 
-    console.log(data)
+  console.log(data);
 
-    return data.accessToken
+  return data.accessToken;
 };
 
 export const register = async (email: string, password: string) => {
-    const result = await fetch(`${baseUrl}/auth/register`, {
-        method: 'POST',
-        headers: {
-            ...baseHeaders
-        },
-        body: JSON.stringify({
-            email, password
-        })
-    })
+  const result = await fetch(`${baseUrl}/auth/register`, {
+    method: "POST",
+    headers: {
+      ...baseHeaders,
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  });
 
-    const data = await result.json()
+  const data = await result.json();
 
-    console.log(data)
+  console.log(data);
 
-    return data.accessToken
+  return data.accessToken;
 };
 
-export const userDetails = async (): Promise<string> => {
-    const result = await fetch(`${baseUrl}/user/details/me`, {
-        method: 'GET',
-        headers: {
-            ...baseHeaders
-        }
-    })
+export const userDetails = async (token: string): Promise<string> => {
+  const result = await fetch(`${baseUrl}/user/details/me`, {
+    method: "GET",
+    headers: {
+      ...baseHeaders,
+      Authorization: "Bearer " + token,
+    },
+  });
 
-    const data = await result.json()
+  const data = await result.json();
 
-    console.log(data)
+  console.log(data);
 
-    return data
+  return data;
 };
 
-export const createGame = async (userId: string): Promise<any> => {
-    const result = await fetch(`${baseUrl}/game`, {
-        method: 'POST',
-        headers: {
-            ...baseHeaders
-        }
-    });
+export const createGame = async (token: string): Promise<any> => {
+  const result = await fetch(`${baseUrl}/game`, {
+    method: "POST",
+    headers: {
+      ...baseHeaders,
+      Authorization: "Bearer " + token,
+    },
+  });
 
-    const data = await result.json();
-    return data;
+  const data = await result.json();
+
+  return data;
 };
 
 export const joinGame = async (userId: string): Promise<any> => {
-    const result = await fetch(`${baseUrl}/game/join/${userId}`, { //TODO: game id, nu user id
-        method: 'POST',
-        headers: {
-            ...baseHeaders
-        }
-    });
-    const data = await result.json();
-    return data;
+  const result = await fetch(`${baseUrl}/game/join/${userId}`, {
+    //TODO: game id, nu user id
+    method: "POST",
+    headers: {
+      ...baseHeaders,
+    },
+  });
+  const data = await result.json();
+  return data;
 };
 
-export const fetchGames = async (): Promise<any> => {
-    const result = await fetch(`${baseUrl}/game`, {
-        method: 'GET',
-        headers: {
-            ...baseHeaders
-        }
-    });
-    const data = await result.json();
-    return data;
+export const fetchGames = async (token: string): Promise<any> => {
+  const result = await fetch(`${baseUrl}/game`, {
+    method: "GET",
+    headers: {
+      ...baseHeaders,
+      Authorization: "Bearer " + token,
+    },
+  });
+  const data = await result.json();
+  return data;
 };

@@ -12,12 +12,18 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/native-stack": "^6.9.25",
+    "@types/react-native-svg-charts": "^5.0.16",
     "expo": "~50.0.8",
     "expo-status-bar": "~1.11.1",
+    "moment": "^2.30.1",
+    "native-base": "^3.4.28",
     "react": "18.2.0",
     "react-native": "0.73.4",
     "react-native-gesture-handler": "^2.15.0",
     "react-native-root-toast": "^3.5.1",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-svg": "^15.1.0",
+    "react-native-svg-charts": "^5.4.0",
     "router": "^1.3.8",
     "styled-components": "^6.1.8",
     "swiftui-react-native": "^5.0.0"

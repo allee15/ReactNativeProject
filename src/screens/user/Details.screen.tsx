@@ -1,20 +1,24 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native"
-import Details from "../../components/Details"
-import { AuthRouteNames } from "../../router/route-names"
-import { useAuth } from "../../hooks/authContext"
-import React, { useEffect, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import Details from "../../components/Details";
+import { AuthRouteNames, GameRouteNames } from "../../router/route-names";
+import { useAuth } from "../../hooks/authContext";
+import React, { useEffect } from "react";
 
 const DetailsScreen = () => {
-    const navigation = useNavigation<any>()
-    const handleLogOut = () => {
-        navigation.navigate(AuthRouteNames.LOGIN)
-    }
-    const auth = useAuth();
-    useEffect(() => {
-        auth.userDetails()
-        }, [])
+  const navigation = useNavigation<any>();
+  const handleLogOut = () => {
+    navigation.navigate("Auth", { screen: AuthRouteNames.LOGIN });
+  };
+  const auth = useAuth();
 
-    return <Details logout={handleLogOut} email={auth.userEmail} />;
-}
+  useEffect(() => {
+    const getUserDetails = async () => {
+      await auth.getUserDetails();
+    };
+    getUserDetails();
+  }, []);
 
-export default DetailsScreen
+  return <Details logout={handleLogOut} userDetails={auth.user} />;
+};
+
+export default DetailsScreen;
