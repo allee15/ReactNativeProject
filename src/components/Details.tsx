@@ -43,11 +43,11 @@ const Details: React.FC<IUserDetails> = ({ logout, userDetails }) => {
 
   return (
     <Container>
-      <Text style={{ fontSize: 24, marginTop: 20 }}>
-        Nice to see you again!
+      <Text style={{ fontSize: 24, fontWeight: "300" }}>
+        Nice to see you again,
       </Text>
-      <Text style={{ fontSize: 16, marginTop: 16 }}>
-        Here is your account email: {userDetails?.user?.email}
+      <Text style={{ fontSize: 16, marginTop: 12, fontWeight: "600" }}>
+        {userDetails?.user?.email}!
       </Text>
       <View style={{ flexDirection: "row", height: 200, paddingVertical: 16 }}>
         <YAxis
@@ -61,12 +61,12 @@ const Details: React.FC<IUserDetails> = ({ logout, userDetails }) => {
             marginRight: 10,
           }}
         />
-        <BarChart
+        <BarChart  
           style={{ flex: 1, marginLeft: -10 }}
           data={data}
           horizontal={true}
           yAccessor={({ item }) => item.value}
-          svg={{ fill: "#93328e" }}
+          svg={{ fill: "#d18cce" }}
           contentInset={{ top: 10, bottom: 10 }}
           gridMin={0}
         >
@@ -84,7 +84,7 @@ const Details: React.FC<IUserDetails> = ({ logout, userDetails }) => {
         />
       </View>
 
-      <Button1 onPress={handleSubmit} style={{ marginTop: 20 }}>
+      <Button1 onPress={handleSubmit} style={{ marginTop: "115%" }}>
         <Text style={{ fontSize: 14, color: "#FFFFFF" }}>
           Logout from my account
         </Text>

@@ -15,8 +15,8 @@ export const GameCard = ({ item }: any) => {
       style={{
         flex: 1,
         height: "auto",
-        minHeight: 100,
-        borderWidth: 2,
+        minHeight: 120,
+        borderWidth: 1,
         borderColor: item.isActive ? "green.600" : "black",
         marginBottom: 10,
         paddingLeft: 5,
@@ -32,7 +32,7 @@ export const GameCard = ({ item }: any) => {
             : handleJoinGame(item.id)
         }
       >
-        <Text style={{ marginBottom: 4 }}>Status: {item.status}</Text>
+        <Text style={{ marginBottom: 8, marginTop: 8, fontSize: 12, fontWeight: "normal" }}>Status: {item.status}</Text>
         <HStack alignItems="center" style={{ columnGap: 10 }} width="100%">
           <Box
             style={{
@@ -40,9 +40,10 @@ export const GameCard = ({ item }: any) => {
               display: "flex",
               height: "100%",
               borderRadius: 10,
-              backgroundColor: "#f160607d",
+              backgroundColor: "#d18cce",
               alignItems: "center",
               justifyContent: "center",
+              padding: 8
             }}
           >
             <Text>{item?.player1?.email || "No oponent yet"}</Text>
@@ -57,6 +58,7 @@ export const GameCard = ({ item }: any) => {
               backgroundColor: "#6082f17c",
               alignItems: "center",
               justifyContent: "center",
+              padding: 8
             }}
           >
             <Text>{item?.player2?.email || "No oponent yet"}</Text>

@@ -13,7 +13,7 @@ export const JoinGameScreen = () => {
   }, []);
 
   return (
-    <View>
+    <View style={{ marginHorizontal: 12, marginVertical: 16 }}>
       <FlatList
         data={gamesList}
         keyExtractor={(item) => item.id}

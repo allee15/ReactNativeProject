@@ -39,16 +39,18 @@ export const WaitingForOponentScreen = ({ route }: any) => {
 
   return (
     <WaitingContainer>
-      <Text style={{ alignSelf: "flex-start" }}>Game id: {id}</Text>
+      <Text style={{ alignSelf: "flex-start", fontSize: 16, fontWeight: "500", color: "#1e38e6" }}>
+        Game id: {id}
+        </Text>
 
       <Text
         style={{
-          fontSize: 25,
+          fontSize: 24,
           fontWeight: "bold",
           marginTop: 200,
         }}
       >
-        Waiting for an oponent
+        Waiting for an opponent
       </Text>
       <Image
         style={{

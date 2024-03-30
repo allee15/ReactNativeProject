@@ -17,13 +17,14 @@ const Container = styled.View`
 
 export const Button1 = styled.TouchableOpacity`
   background-color: #93328e;
-  padding: 10px;
+  padding: 12px;
   align-items: center;
+  width: 100%
 `;
 export const Button2 = styled.TouchableOpacity`
   background-color: #ffffff;
   border: 1px solid #93328e;
-  padding: 10px;
+  padding: 12px;
   align-items: center;
 `;
 
@@ -65,24 +66,26 @@ const Table: React.FC<ITable> = ({
 
   return (
     <Container>
-      <Text style={{ fontSize: 28, fontWeight: "bold", marginBottom: 4 }}>
-        Hello, adventurer!
-      </Text>
+      <Text style={{ fontSize: 24, fontWeight: "500", marginBottom: 20, alignSelf: 'flex-start' }}>
+        Here are your current games
+        </Text>
 
-      <Text>Here are your current games</Text>
       <Box
         style={{
           flexWrap: "wrap",
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          marginBottom: 20
         }}
       >
-        <Text>Show only games I can join</Text>
+        <Text style={{ fontSize: 16, fontWeight: "normal", marginBottom: 16 }}>
+          Show only games I can join
+          </Text>
         <Switch
           collapsable={true}
-          trackColor={{ false: "red", true: "green" }}
-          thumbColor={isEnabled ? "black" : "white"}
+          trackColor={{ false: "white", true: "#93328e" }}
+          thumbColor={isEnabled ? "white" : "black"}
           onValueChange={() => setIsEnabled(!isEnabled)}
           value={isEnabled}
         />

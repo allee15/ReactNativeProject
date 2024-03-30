@@ -36,7 +36,7 @@ export const CreateGameScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Select type of game</Text>
+      <Text style={{fontSize: 20, fontWeight: "500", alignSelf: 'flex-start' }}>Select type of game</Text>
 
       <FlatList
         style={styles.listContainer}
@@ -56,24 +56,28 @@ export const CreateGameScreen = () => {
         )}
       />
       {selectedGameDescription && (
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+        <>
+        <Text style={{ fontSize: 18, fontWeight: "500", alignSelf: 'flex-start' }}>
           {selectedGameDescription}
         </Text>
-      )}
-
-      <Text
+        <Text
         style={{
-          marginTop: "100%",
-          marginBottom: 15,
+          marginBottom: 16,
+          marginTop: 16,
           display: "flex",
-          textAlign: "center",
+          textAlign: "left",
+          fontSize: 14
         }}
       >
-        Once you've created a game and selected multi-player, it will be
+        *Once you've created a game and selected multi-player, it will be
         inserted in a waiting queue list for an oponent
       </Text>
-      <Button1 onPress={handleCreateGame}>
-        <Text>Create game</Text>
+      </>
+      )}
+
+      
+      <Button1 onPress={handleCreateGame} style={{  marginTop: "80%", marginBottom: 20 }}>
+        <Text style={{ fontSize: 14, color: "#FFFFFF" }}>Create game</Text>
       </Button1>
     </View>
   );
