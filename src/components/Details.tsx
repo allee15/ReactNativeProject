@@ -36,9 +36,9 @@ const Details: React.FC<IUserDetails> = ({ logout, userDetails }) => {
       value: userDetails?.currentlyGamesPlaying || 5,
       label: "Currently games playing",
     },
-    { value: userDetails?.gamesLost || 1, label: "Games Lost" },
-    { value: userDetails?.gamesPlayed || 1, label: "Games played" },
-    { value: userDetails?.gamesWon || 1, label: "Games won" },
+    { value: userDetails?.gamesLost || 0, label: "Games Lost" },
+    { value: userDetails?.gamesPlayed || 0, label: "Games played" },
+    { value: userDetails?.gamesWon || 0, label: "Games won" },
   ];
 
   return (
@@ -61,7 +61,7 @@ const Details: React.FC<IUserDetails> = ({ logout, userDetails }) => {
             marginRight: 10,
           }}
         />
-        <BarChart  
+        <BarChart
           style={{ flex: 1, marginLeft: -10 }}
           data={data}
           horizontal={true}

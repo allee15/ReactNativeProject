@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, View } from "react-native";
+import { View, FlatList } from "native-base";
 import { GameCard } from "../../components/GameCard";
 import { useGame } from "../../hooks/gameContext";
 import { useAuth } from "../../hooks/authContext";
@@ -16,8 +16,8 @@ export const JoinGameScreen = () => {
     <View style={{ marginHorizontal: 12, marginVertical: 16 }}>
       <FlatList
         data={gamesList}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <GameCard item={item} />}
+        keyExtractor={(item: any) => item?.id}
+        renderItem={({ item }) => <GameCard onClick item={item} />}
       />
     </View>
   );

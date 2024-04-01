@@ -8,5 +8,5 @@ export const enum GameRouteNames {
   DETAILS = "DETAILS",
   NEWGAME = "NEWGAME",
   JOINGAME = "JOINGAME",
-  WAITINGQUEUE = "GAME",
+  GAME = "GAME",
 }

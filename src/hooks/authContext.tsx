@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   createGame,
   joinGame,
@@ -7,6 +7,7 @@ import {
   userDetails,
   fetchGames,
 } from "../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface IUser {
   currentlyGamesPlaying: number;
@@ -26,9 +27,10 @@ interface IAuthContext {
   joinNewGame: string;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
   getUserDetails: () => Promise<void>;
   createGame: (userId: string) => Promise<void>;
-  joinGame: (userId: string) => Promise<void>;
+  joinGame: (userId: string) => Promise<any>;
 }
 
 const AuthContext = createContext<IAuthContext>({
@@ -38,6 +40,7 @@ const AuthContext = createContext<IAuthContext>({
   joinNewGame: "",
   login: async () => {},
   register: async () => {},
+  logout: async () => {},
   getUserDetails: async () => {},
   createGame: async () => {},
   joinGame: async () => {},
@@ -54,7 +57,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleLogin = async (email: string, password: string) => {
     try {
       const result = await login(email, password);
-      console.log("login: ", result);
+      await AsyncStorage.setItem("token", result);
       setToken(result);
     } catch (error) {
       console.log(error);
@@ -63,10 +66,18 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const handleRegister = async (email: string, password: string) => {
     try {
       const result = await register(email, password);
-      console.log("register: ", result);
+      await AsyncStorage.setItem("token", result);
       setToken(result);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleLogout = async () => {
+    if (token) {
+      setToken("");
+
+      await AsyncStorage.removeItem("token");
     }
   };
 
@@ -92,9 +103,10 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const handleJoinGame = async (userId: string) => {
     try {
-      const result = await joinGame(userId);
+      const result = await joinGame(token, userId);
       console.log("joinGame: ", result);
       setJoinGame(result);
+      return result;
     } catch (error) {
       console.log("Error joining game:", error);
     }
@@ -109,6 +121,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
         joinNewGame,
         login: handleLogin,
         register: handleRegister,
+        logout: handleLogout,
         getUserDetails: fetchUserDetails,
         createGame: handleCreateGame,
         joinGame: handleJoinGame,

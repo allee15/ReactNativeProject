@@ -3,11 +3,10 @@ import { createGame, fetchGames, joinGame } from "../api";
 
 interface IGameContext {
   gamesList: any[];
-  selectedGame: object | undefined;
+  selectedGame: any | undefined;
   fetchGames: (token: string) => Promise<void>;
   createGame: (token: string) => Promise<void>;
   handleSelectGame: (id: string | undefined) => void;
-  handleJoinGame: (id: string) => Promise<void>;
 }
 
 const GameContext = createContext<IGameContext>({
@@ -16,7 +15,6 @@ const GameContext = createContext<IGameContext>({
   fetchGames: async () => {},
   createGame: async (token: string) => {},
   handleSelectGame: () => {},
-  handleJoinGame: async (id: string) => {},
 });
 
 export const GameContextProvider: React.FC<PropsWithChildren> = ({
@@ -59,14 +57,6 @@ export const GameContextProvider: React.FC<PropsWithChildren> = ({
     setSelectedGame(gamesList.find((g) => g.id === id));
   };
 
-  const handleJoinGame = async (gameId: string) => {
-    try {
-      const response = await joinGame(gameId);
-    } catch (err) {
-      console.log("Erorr joining game: ", err);
-    }
-  };
-
   return (
     <GameContext.Provider
       value={{
@@ -75,7 +65,6 @@ export const GameContextProvider: React.FC<PropsWithChildren> = ({
         fetchGames: handleFetchGames,
         createGame: handleCreateGame,
         handleSelectGame: handleSelectGame,
-        handleJoinGame: handleJoinGame,
       }}
     >
       {children}

@@ -1,3 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+
 const baseUrl = "https://malamute-enabled-yak.ngrok-free.app";
 
 const baseHeaders = {
@@ -22,8 +25,6 @@ export const login = async (
 
   const data = await result.json();
 
-  console.log(data);
-
   return data.accessToken;
 };
 
@@ -41,21 +42,17 @@ export const register = async (email: string, password: string) => {
 
   const data = await result.json();
 
-  console.log(data);
-
   return data.accessToken;
 };
 
 export const userDetails = async (token: string): Promise<string> => {
-  const result = await fetch(`${baseUrl}/user/details/me`, {
-    method: "GET",
+  const tokenToSend = token || (await AsyncStorage.getItem("token"));
+  const { data } = await axios.get(`${baseUrl}/user/details/me`, {
     headers: {
       ...baseHeaders,
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenToSend,
     },
   });
-
-  const data = await result.json();
 
   console.log(data);
 
@@ -63,11 +60,12 @@ export const userDetails = async (token: string): Promise<string> => {
 };
 
 export const createGame = async (token: string): Promise<any> => {
+  const tokenToSend = token || (await AsyncStorage.getItem("token"));
   const result = await fetch(`${baseUrl}/game`, {
     method: "POST",
     headers: {
       ...baseHeaders,
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenToSend,
     },
   });
 
@@ -76,12 +74,14 @@ export const createGame = async (token: string): Promise<any> => {
   return data;
 };
 
-export const joinGame = async (userId: string): Promise<any> => {
+export const joinGame = async (token: string, userId: string): Promise<any> => {
+  const tokenToSend = token || (await AsyncStorage.getItem("token"));
   const result = await fetch(`${baseUrl}/game/join/${userId}`, {
     //TODO: game id, nu user id
     method: "POST",
     headers: {
       ...baseHeaders,
+      Authorization: "Bearer " + tokenToSend,
     },
   });
   const data = await result.json();
@@ -89,11 +89,12 @@ export const joinGame = async (userId: string): Promise<any> => {
 };
 
 export const fetchGames = async (token: string): Promise<any> => {
+  const tokenToSend = token || (await AsyncStorage.getItem("token"));
   const result = await fetch(`${baseUrl}/game`, {
     method: "GET",
     headers: {
       ...baseHeaders,
-      Authorization: "Bearer " + token,
+      Authorization: "Bearer " + tokenToSend,
     },
   });
   const data = await result.json();

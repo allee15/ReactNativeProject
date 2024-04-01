@@ -19,7 +19,7 @@ export const Button1 = styled.TouchableOpacity`
   background-color: #93328e;
   padding: 12px;
   align-items: center;
-  width: 100%
+  width: 100%;
 `;
 export const Button2 = styled.TouchableOpacity`
   background-color: #ffffff;
@@ -62,13 +62,18 @@ const Table: React.FC<ITable> = ({
       g?.player2?.email === user?.user?.email
   );
 
-  console.log(filteredGames.length);
-
   return (
     <Container>
-      <Text style={{ fontSize: 24, fontWeight: "500", marginBottom: 20, alignSelf: 'flex-start' }}>
+      <Text
+        style={{
+          fontSize: 24,
+          fontWeight: "500",
+          marginBottom: 20,
+          alignSelf: "flex-start",
+        }}
+      >
         Here are your current games
-        </Text>
+      </Text>
 
       <Box
         style={{
@@ -76,12 +81,12 @@ const Table: React.FC<ITable> = ({
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          marginBottom: 20
+          marginBottom: 20,
         }}
       >
         <Text style={{ fontSize: 16, fontWeight: "normal", marginBottom: 16 }}>
           Show only games I can join
-          </Text>
+        </Text>
         <Switch
           collapsable={true}
           trackColor={{ false: "white", true: "#93328e" }}

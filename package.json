@@ -10,9 +10,11 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/native-stack": "^6.9.25",
     "@types/react-native-svg-charts": "^5.0.16",
+    "axios": "^1.6.8",
     "expo": "~50.0.8",
     "expo-status-bar": "~1.11.1",
     "moment": "^2.30.1",

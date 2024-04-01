@@ -3,12 +3,27 @@ import { Text, View } from "react-native";
 import { GameRouteNames } from "../router/route-names";
 import { Box, HStack, Pressable } from "native-base";
 import { useAuth } from "../hooks/authContext";
-import { useGame } from "../hooks/gameContext";
 
 export const GameCard = ({ item }: any) => {
   const navigation = useNavigation<any>();
   const { user } = useAuth();
-  const { handleJoinGame } = useGame();
+  const { joinGame } = useAuth();
+
+  const handleStartGame = () => {
+    navigation.navigate(GameRouteNames.GAME, {
+      id: item.id,
+    });
+  };
+
+  const handleJoinOponentGame = async (id: string) => {
+    const res = await joinGame(id);
+    console.log("res", res);
+    if (res.code < 300) {
+      navigation.navigate(GameRouteNames.GAME, {
+        id: item.id,
+      });
+    }
+  };
 
   return (
     <Box
@@ -22,28 +37,50 @@ export const GameCard = ({ item }: any) => {
         paddingLeft: 5,
         paddingRight: 5,
       }}
+      {...(item?.player1?.email &&
+        item?.player1?.email !== user.user.email &&
+        item?.player2?.email &&
+        item?.player2?.email !== user.user.email && {
+          backgroundColor: "gray.600",
+        })}
     >
       <Pressable
-        onPress={() =>
-          item.player1.email === user.user.email
-            ? navigation.navigate(GameRouteNames.WAITINGQUEUE, {
-                id: item.id,
-              })
-            : handleJoinGame(item.id)
+        onPress={() => {
+          item?.player1?.email === user.user.email ||
+          item?.player2?.email === user.user.email
+            ? handleStartGame()
+            : handleJoinOponentGame(item.id);
+        }}
+        disabled={
+          item?.player1?.email !== user.user.email &&
+          item?.player2?.email !== user.user.email
         }
       >
-        <Text style={{ marginBottom: 8, marginTop: 8, fontSize: 12, fontWeight: "normal" }}>Status: {item.status}</Text>
-        <HStack alignItems="center" style={{ columnGap: 10 }} width="100%">
+        <Text
+          style={{
+            marginBottom: 8,
+            marginTop: 8,
+            fontSize: 12,
+            fontWeight: "normal",
+          }}
+        >
+          Status: {item.status}
+        </Text>
+        <HStack
+          alignItems="center"
+          padding={2}
+          style={{ columnGap: 10 }}
+          width="100%"
+        >
           <Box
             style={{
               flex: 1,
               display: "flex",
-              height: "100%",
+              height: 100,
               borderRadius: 10,
               backgroundColor: "#d18cce",
               alignItems: "center",
               justifyContent: "center",
-              padding: 8
             }}
           >
             <Text>{item?.player1?.email || "No oponent yet"}</Text>
@@ -53,12 +90,12 @@ export const GameCard = ({ item }: any) => {
             style={{
               flex: 1,
               display: "flex",
-              height: "100%",
+              height: 100,
               borderRadius: 10,
               backgroundColor: "#6082f17c",
               alignItems: "center",
               justifyContent: "center",
-              padding: 8
+              padding: 8,
             }}
           >
             <Text>{item?.player2?.email || "No oponent yet"}</Text>

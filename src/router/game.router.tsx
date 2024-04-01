@@ -4,7 +4,7 @@ import TableScreen from "../screens/game/Table.screen";
 import DetailsScreen from "../screens/user/Details.screen";
 import { JoinGameScreen } from "../screens/game/JoinGame.screen";
 import { CreateGameScreen } from "../screens/game/CreateGame.screen";
-import { WaitingForOponentScreen } from "../screens/game/WaitingForOponentScreen";
+import { GameScreen } from "../screens/game/Game.screen";
 
 const GameStack = createNativeStackNavigator();
 
@@ -23,10 +23,7 @@ const gameRoutes = (
         headerTitle: "Create a new game",
       }}
     />
-    <GameStack.Screen
-      name={GameRouteNames.WAITINGQUEUE}
-      component={WaitingForOponentScreen}
-    />
+    <GameStack.Screen name={GameRouteNames.GAME} component={GameScreen} />
   </GameStack.Navigator>
 );
 

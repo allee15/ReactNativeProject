@@ -6,10 +6,12 @@ import React, { useEffect } from "react";
 
 const DetailsScreen = () => {
   const navigation = useNavigation<any>();
-  const handleLogOut = () => {
+  const auth = useAuth();
+
+  const handleLogOut = async () => {
+    await auth.logout();
     navigation.navigate("Auth", { screen: AuthRouteNames.LOGIN });
   };
-  const auth = useAuth();
 
   useEffect(() => {
     const getUserDetails = async () => {
