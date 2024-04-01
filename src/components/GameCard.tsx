@@ -32,7 +32,7 @@ export const GameCard = ({ item }: any) => {
         height: "auto",
         minHeight: 120,
         borderWidth: 1,
-        borderColor: item.isActive ? "green.600" : "black",
+        borderColor: item.isActive ? "green.400" : "gray.200",
         marginBottom: 10,
         paddingLeft: 5,
         paddingRight: 5,
@@ -41,7 +41,7 @@ export const GameCard = ({ item }: any) => {
         item?.player1?.email !== user.user.email &&
         item?.player2?.email &&
         item?.player2?.email !== user.user.email && {
-          backgroundColor: "gray.600",
+          backgroundColor: "gray.200",
         })}
     >
       <Pressable

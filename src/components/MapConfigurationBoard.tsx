@@ -3,8 +3,8 @@ import { Box, Column, Row, View, Text, Heading } from "native-base";
 export const MapConfigurationBoard = () => {
   return (
     <View>
-      <Heading textAlign="center">You have joined a game</Heading>
-      <Text marginBottom={4} textAlign="center">
+      <Heading textAlign="left" paddingLeft={4}>You have joined a game</Heading>
+      <Text marginBottom={4} textAlign="left" paddingLeft={4}>
         Before starting the game, you have to configure your map
       </Text>
 
