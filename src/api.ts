@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
-const baseUrl = "https://malamute-enabled-yak.ngrok-free.app";
+const baseUrl = "http://163.172.177.98:8081/docs";
 
 const baseHeaders = {
   "Content-Type": "application/json",
